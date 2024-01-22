@@ -1,5 +1,6 @@
 //setting up a basic express server, listening for one route /hello
 //set up variable equal to require express package
+
 const express = require("express");
 
 //initialize
@@ -8,6 +9,7 @@ const app = express();
 //  IMPORTED ROUTES (imported tasks) basically info exported from other js files we import here to the main file
 //  used variable named tasks because the js routes file name is tasks.js, then you require('place your path back to specific folder')
 const tasks = require("./routes/tasks");
+const connectDB = require("./db/connect");
 
 //  MIDDLEWARE (express JSON allows you to access )
 app.use(express.json());
@@ -33,5 +35,15 @@ app.use("/api/v1/tasks", tasks);
 //invoke (currently set to 3000 but there will be more code )
 const port = 3000;
 
-//  PLACED LAST SO SERVER IS READY
-app.listen(port, console.log("server is listening on port ${port}..."));
+const start = async () => {
+  try {
+    await connectDB();
+
+    //  PLACED LAST SO SERVER IS READY
+    app.listen(port, console.log(`server is listening on port ${port}...`));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+start();
