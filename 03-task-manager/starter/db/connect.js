@@ -1,10 +1,7 @@
 const mongoose = require("mongoose");
 
-const connectionString =
-  "mongodb+srv://Zo:1234@nodeexpressprojects.difmxbu.mongodb.net/?retryWrites=true&w=majority";
-
-const connectDB = () => {
-  return mongoose.connect(connectionString, {
+const connectDB = (url) => {
+  return mongoose.connect(url, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
