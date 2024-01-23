@@ -38,7 +38,7 @@ app.use(notFound);
 app.use(errorHandlerMiddleware);
 
 //invoke (currently set to 3000 but there will be more code )
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const start = async () => {
   try {
