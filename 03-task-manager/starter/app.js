@@ -13,15 +13,12 @@ const connectDB = require("./db/connect");
 require("dotenv").config();
 
 //  MIDDLEWARE (express JSON allows you to access )
+app.use(express.static("./public"));
 app.use(express.json());
 
 //  ROUTES
 //  routes THIS IS A GET REQUEST (BASICALLY WHERE THE PAGE IS STORED IT'S URL)
 //  to the right is the callback function passing through (req, res) which is request and response
-//  app is used because we initialized with a const app, so wee use that
-app.get("/hello", (req, res) => {
-  res.send("Task Manager App");
-});
 
 //  ROUTES TO USE ('what route we are looking for', tasks)
 
