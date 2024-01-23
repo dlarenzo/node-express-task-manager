@@ -1,11 +1,14 @@
 require("dotenv").config();
 
 //  async errors
+require("express-async-errors");
 
 const express = require("express");
 const app = express();
 
 const connectDB = require("./db/connect");
+
+const productsRouter = require("./routes/products");
 
 const notFoundMiddleware = require("./middleware/not-found");
 const errorMiddleware = require("./middleware/error-handler");
@@ -19,6 +22,8 @@ app.get("/", (req, res) => {
   res.send('<h1>Store API</h1><a href="/api/v1/products">products route</a>');
 });
 
+app.use("/api/v1/products", productsRouter);
+
 //  products route
 
 app.use(notFoundMiddleware);
@@ -30,7 +35,7 @@ const start = async () => {
   try {
     //  connectDB
     await connectDB(
-      "mongodb+srv://Zo:1234@nodeexpressprojects.difmxbu.mongodb.net/?retryWrites=true&w=majority"
+      "mongodb+srv://Zo:1234@nodeexpressprojects.difmxbu.mongodb.net/04-STORE-API?retryWrites=true&w=majority"
     );
     app.listen(port, console.log(`Server is listening port ${port}...`));
   } catch (error) {
