@@ -11,6 +11,7 @@ const app = express();
 const tasks = require("./routes/tasks");
 const connectDB = require("./db/connect");
 require("dotenv").config();
+const notFound = require("./middleware/not-found");
 
 //  MIDDLEWARE (express JSON allows you to access )
 app.use(express.static("./public"));
@@ -29,6 +30,9 @@ app.use("/api/v1/tasks", tasks);
 //  app.get('/api/v1/tasks/:id')  -get single task
 //  app.patch('/api/v1/tasks/:id')  -update task
 //  app.delete('/api/v1/tasks/:id')  -delete task
+
+//Route does not exist message
+app.use(notFound);
 
 //invoke (currently set to 3000 but there will be more code )
 const port = 3000;
