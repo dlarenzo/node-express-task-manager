@@ -12,6 +12,7 @@ const tasks = require("./routes/tasks");
 const connectDB = require("./db/connect");
 require("dotenv").config();
 const notFound = require("./middleware/not-found");
+const errorHandlerMiddleware = require("./middleware/error-handler");
 
 //  MIDDLEWARE (express JSON allows you to access )
 app.use(express.static("./public"));
@@ -33,6 +34,8 @@ app.use("/api/v1/tasks", tasks);
 
 //Route does not exist message
 app.use(notFound);
+//app.use(errorHandlerMiddleware);
+app.use(errorHandlerMiddleware);
 
 //invoke (currently set to 3000 but there will be more code )
 const port = 3000;
