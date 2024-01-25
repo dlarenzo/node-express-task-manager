@@ -35,7 +35,13 @@ const start = async () => {
   try {
     //  connectDB
     await connectDB(
-      "mongodb+srv://Zo:1234@nodeexpressprojects.difmxbu.mongodb.net/04-STORE-API?retryWrites=true&w=majority"
+      "mongodb+srv://Zo:1234@nodeexpressprojects.difmxbu.mongodb.net/04-STORE-API?retryWrites=true&w=majority",
+      {
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useFindAndModify: false,
+        useUnifiedTopology: true,
+      }
     );
     app.listen(port, console.log(`Server is listening port ${port}...`));
   } catch (error) {
@@ -43,4 +49,5 @@ const start = async () => {
   }
 };
 
+console.log(process.env.MONGO_URI);
 start();
